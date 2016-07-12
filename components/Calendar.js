@@ -123,9 +123,9 @@ export default class Calendar extends Component {
     this.setState({ currentMonthMoment: newMoment });
 
     if (currentPage < VIEW_INDEX) {
-      this.props.onSwipePrev && this.props.onSwipePrev(newMoment);
+      this.props.onSwipePrev && this.props.onSwipePrev();
     } else if (currentPage > VIEW_INDEX) {
-      this.props.onSwipeNext && this.props.onSwipeNext(newMoment);
+      this.props.onSwipeNext && this.props.onSwipeNext();
     }
   }
 
@@ -174,7 +174,7 @@ export default class Calendar extends Component {
           />
         ));
       } else {
-        days.push(<Day key={`${renderIndex}`} filler customStyle={this.props.customStyle} />);
+        days.push(<Day key={`${renderIndex}`} filler />);
       }
       if (renderIndex % 7 === 6) {
         weekRows.push(
@@ -191,8 +191,7 @@ export default class Calendar extends Component {
       }
       renderIndex += 1;
     } while (true)
-    const containerStyle = [styles.monthContainer, this.props.customStyle.monthContainer];
-    return <View key={argMoment.month()} style={containerStyle}>{weekRows}</View>;
+    return <View key={argMoment.month()} style={styles.monthContainer}>{weekRows}</View>;
   }
 
   renderHeading() {

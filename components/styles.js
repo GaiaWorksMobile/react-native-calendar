@@ -10,13 +10,15 @@ const styles = StyleSheet.create({
     width: DEVICE_WIDTH,
   },
   calendarControls: {
+    flex: 1,
     flexDirection: 'row',
   },
   controlButton: {
   },
   controlButtonText: {
     margin: 10,
-    fontSize: 15,
+    fontSize: 11,
+    color: '#999999',
   },
   title: {
     flex: 1,
@@ -28,19 +30,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderTopWidth: 0.5,
     borderBottomWidth: 0.5,
+    borderColor: '#e3e3e3',
+    backgroundColor: '#efeff4',
+    height: 33,
   },
   dayHeading: {
     flex: 1,
-    fontSize: 15,
+    fontSize: 11,
+    color: '#999999',
     textAlign: 'center',
-    marginVertical: 5,
+    marginVertical: 7,
   },
   weekendHeading: {
     flex: 1,
-    fontSize: 15,
+    fontSize: 11,
+    color: '#999999',
     textAlign: 'center',
-    marginVertical: 5,
-    color: '#cccccc',
+    marginVertical: 7,
   },
   weekRow: {
     flexDirection: 'row',
@@ -49,16 +55,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 5,
     width: DEVICE_WIDTH / 7,
-    borderTopWidth: 1,
-    borderTopColor: '#e9e9e9',
   },
   dayButtonFiller: {
     padding: 5,
     width: DEVICE_WIDTH / 7,
   },
   day: {
-    fontSize: 16,
+    fontSize: 11,
     alignSelf: 'center',
+    color: '#454545'
   },
   eventIndicatorFiller: {
     marginTop: 3,
@@ -73,29 +78,28 @@ const styles = StyleSheet.create({
   dayCircleFiller: {
     justifyContent: 'center',
     backgroundColor: 'transparent',
-    width: 28,
-    height: 28,
-    borderRadius: 14,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
   },
   currentDayCircle: {
-    backgroundColor: 'red',
+    backgroundColor: '#cccccc',
+  },
+  weekendDayCircle: {
+    backgroundColor: '#ffc817',
   },
   currentDayText: {
-    color: 'red',
+    color: '#525252',
   },
   selectedDayCircle: {
     backgroundColor: 'black',
-  },
-  hasEventCircle: {
-  },
-  hasEventText: {
   },
   selectedDayText: {
     color: 'white',
     fontWeight: 'bold',
   },
   weekendDayText: {
-    color: '#cccccc',
+    color: 'white',
   },
 });
 
