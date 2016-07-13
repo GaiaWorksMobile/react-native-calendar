@@ -88,6 +88,9 @@ const styles = StyleSheet.create({
   weekendDayCircle: {
     backgroundColor: '#ffc817',
   },
+  eventDayCircle: {
+    backgroundColor: '#1fd662',
+  },
   currentDayText: {
     color: '#525252',
   },
@@ -99,6 +102,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   weekendDayText: {
+    color: 'white',
+  },
+  eventDayText: {
     color: 'white',
   },
 });

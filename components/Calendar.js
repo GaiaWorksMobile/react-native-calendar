@@ -95,6 +95,7 @@ export default class Calendar extends Component {
   selectDate(date) {
     this.setState({ selectedMoment: date });
     this.props.onDateSelect && this.props.onDateSelect(date.format());
+    console.log(date);
   }
 
   onPrev = () => {
@@ -163,6 +164,8 @@ export default class Calendar extends Component {
             isWeekend={isoWeekday === 0 || isoWeekday === 6}
             key={`${renderIndex}`}
             onPress={() => {
+              console.log('dayIndex :  '+dayIndex);
+              console.log('startOfArgMonthMoment :  '+startOfArgMonthMoment);
               this.selectDate(moment(startOfArgMonthMoment).set('date', dayIndex + 1));
             }}
             caption={`${dayIndex + 1}`}
@@ -192,6 +195,12 @@ export default class Calendar extends Component {
       renderIndex += 1;
     } while (true)
     return <View key={argMoment.month()} style={styles.monthContainer}>{weekRows}</View>;
+  }
+
+  componentWillMount(){
+    let {onClickDay} = this.props;
+    if(onClickDay)
+      onClickDay();
   }
 
   renderHeading() {
@@ -253,6 +262,7 @@ export default class Calendar extends Component {
   }
 
   render() {
+    // console.log("currentMonthMoment  :  " + this.state.currentMonthMoment)
     const calendarDates = this.getMonthStack(this.state.currentMonthMoment);
     const eventDatesMap = this.prepareEventDates(this.props.eventDates);
 
