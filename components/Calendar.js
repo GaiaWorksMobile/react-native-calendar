@@ -100,12 +100,22 @@ export default class Calendar extends Component {
 
   onPrev = () => {
     const newMoment = moment(this.state.currentMonthMoment).subtract(1, 'month');
+    
     this.setState({ currentMonthMoment: newMoment });
     this.props.onTouchPrev && this.props.onTouchPrev(newMoment);
   }
 
   onNext = () => {
-    const newMoment = moment(this.state.currentMonthMoment).add(1, 'month');
+    const newMoment = moment(this.state.currentMonthMoment).add(3, 'month');
+    this.setState({ currentMonthMoment: newMoment });
+    this.props.onTouchNext && this.props.onTouchNext(newMoment);
+  }
+  //下标由0开始
+  jump(monthIndex) {
+    console.log("monthIndex   :  " + monthIndex);
+    let currentMonth = moment(this.state.currentMonthMoment).month();
+    let dis = monthIndex - currentMonth;
+    const newMoment = moment(this.state.currentMonthMoment).add(dis, 'month');
     this.setState({ currentMonthMoment: newMoment });
     this.props.onTouchNext && this.props.onTouchNext(newMoment);
   }
@@ -131,6 +141,9 @@ export default class Calendar extends Component {
   }
 
   renderMonthView(argMoment, eventDatesMap) {
+    console.log("argMoment :  " + argMoment)
+
+    console.log("eventDatesMap :  " + JSON.stringify(eventDatesMap))
 
     let
       renderIndex = 0,
@@ -262,7 +275,7 @@ export default class Calendar extends Component {
   }
 
   render() {
-    // console.log("currentMonthMoment  :  " + this.state.currentMonthMoment)
+    console.log("currentMonthMoment  month() :  " + this.state.currentMonthMoment.month());
     const calendarDates = this.getMonthStack(this.state.currentMonthMoment);
     const eventDatesMap = this.prepareEventDates(this.props.eventDates);
 
