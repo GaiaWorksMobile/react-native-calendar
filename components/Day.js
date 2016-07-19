@@ -31,13 +31,15 @@ export default class Day extends Component {
 
     if (isSelected && !isToday) {
       dayCircleStyle.push(styles.selectedDayCircle, customStyle.selectedDayCircle && customStyle.selectedDayCircle);
-    } else if (isSelected && isToday) {
-      dayCircleStyle.push(styles.currentDayCircle, customStyle.currentDayCircle && customStyle.currentDayCircle);
-    } else if (isWeekend) {
+    }else if (isWeekend) {
       dayCircleStyle.push(styles.weekendDayCircle, customStyle.weekendDayCircle && customStyle.weekendDayCircle);
-    } else if (hasEvent && hasEvent === true) {
+    } 
+    if (hasEvent && hasEvent === true) {
       dayCircleStyle.push(styles.eventDayCircle, customStyle.eventDayCircle && customStyle.eventDayCircle);
-    }
+    } 
+    if (isToday) {
+      dayCircleStyle.push(styles.currentDayCircle, customStyle.currentDayCircle && customStyle.currentDayCircle);
+    } 
     return dayCircleStyle;
   }
 

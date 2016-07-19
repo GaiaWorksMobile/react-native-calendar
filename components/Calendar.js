@@ -265,13 +265,7 @@ export default class Calendar extends Component {
           </TouchableOpacity>
         </View>
       )
-    : (
-      <View style={[styles.calendarControls, this.props.customStyle.calendarControls]}>
-        <Text style={[styles.title, this.props.customStyle.title]}>
-          {this.state.currentMonthMoment.format(this.props.titleFormat)}
-        </Text>
-      </View>
-    );
+    : null;
   }
 
   render() {
