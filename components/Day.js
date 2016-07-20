@@ -31,9 +31,10 @@ export default class Day extends Component {
 
     if (isSelected && !isToday) {
       dayCircleStyle.push(styles.selectedDayCircle, customStyle.selectedDayCircle && customStyle.selectedDayCircle);
-    }else if (isWeekend) {
-      dayCircleStyle.push(styles.weekendDayCircle, customStyle.weekendDayCircle && customStyle.weekendDayCircle);
-    } 
+    }
+    // else if (isWeekend) {
+    //   dayCircleStyle.push(styles.weekendDayCircle, customStyle.weekendDayCircle && customStyle.weekendDayCircle);
+    // } 
     if (hasEvent && hasEvent === true) {
       dayCircleStyle.push(styles.eventDayCircle, customStyle.eventDayCircle && customStyle.eventDayCircle);
     } 
@@ -51,9 +52,11 @@ export default class Day extends Component {
       dayTextStyle.push(styles.currentDayText, customStyle.currentDayText && customStyle.currentDayText);
     } else if (isToday || isSelected) {
       dayTextStyle.push(styles.selectedDayText, customStyle.selectedDayText && customStyle.selectedDayText);
-    } else if (isWeekend) {
-      dayTextStyle.push(styles.weekendDayText, customStyle.weekendDayText && customStyle.weekendDayText);
-    } else if (hasEvent && hasEvent === true) {
+    }
+    //  else if (isWeekend) {
+    //   dayTextStyle.push(styles.weekendDayText, customStyle.weekendDayText && customStyle.weekendDayText);
+    // } 
+    else if (hasEvent && hasEvent === true) {
       dayTextStyle.push(styles.eventDayText, customStyle.eventDayText && customStyle.eventDayText);
     } 
     return dayTextStyle;
