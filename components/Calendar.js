@@ -92,6 +92,20 @@ export default class Calendar extends Component {
     return parsedDates;
   }
 
+  prepareHolidayDates(eventDates) {
+    const parsedDates = {};
+
+    eventDates.forEach(event => {
+      const date = moment(event);
+      const month = moment(date).startOf('month').format();
+      if (!parsedDates[month]) {
+        parsedDates[month] = {};
+      }
+      parsedDates[month][date.date() - 1] = true;
+    })
+    return parsedDates;
+  }
+
   selectDate(date) {
     this.setState({ selectedMoment: date });
     this.props.onDateSelect && this.props.onDateSelect(date.format());
@@ -140,10 +154,12 @@ export default class Calendar extends Component {
     }
   }
 
-  renderMonthView(argMoment, eventDatesMap) {
+  renderMonthView(argMoment, eventDatesMap, holidayDatesMap) {
     console.log("argMoment :  " + argMoment)
 
     console.log("eventDatesMap :  " + JSON.stringify(eventDatesMap))
+
+    console.log("holidayDatesMap :  " + JSON.stringify(holidayDatesMap))
 
     let
       renderIndex = 0,
@@ -166,6 +182,10 @@ export default class Calendar extends Component {
       ? eventDatesMap[argMoment.startOf('month').format()]
       : null;
 
+    const holiday = (holidayDatesMap !== null)
+      ? holidayDatesMap[argMoment.startOf('month').format()]
+      : null;
+
     do {
       const dayIndex = renderIndex - offset;
       const isoWeekday = (renderIndex + weekStart) % 7;
@@ -185,6 +205,7 @@ export default class Calendar extends Component {
             isToday={argMonthIsToday && (dayIndex === todayIndex)}
             isSelected={selectedMonthIsArg && (dayIndex === selectedIndex)}
             hasEvent={events && events[dayIndex] === true}
+            isHoliday={holiday && holiday[dayIndex] === true}
             usingEvents={this.props.eventDates.length > 0}
             customStyle={this.props.customStyle}
           />
@@ -272,6 +293,7 @@ export default class Calendar extends Component {
     console.log("currentMonthMoment  month() :  " + this.state.currentMonthMoment.month());
     const calendarDates = this.getMonthStack(this.state.currentMonthMoment);
     const eventDatesMap = this.prepareEventDates(this.props.eventDates);
+    const holidayDatesMap = this.prepareHolidayDates(this.props.holidayDates);
 
     return (
       <View style={[styles.calendarContainer, this.props.customStyle.calendarContainer]}>
@@ -289,11 +311,11 @@ export default class Calendar extends Component {
             automaticallyAdjustContentInsets
             onMomentumScrollEnd={(event) => this.scrollEnded(event)}
           >
-            {calendarDates.map((date) => this.renderMonthView(moment(date), eventDatesMap))}
+            {calendarDates.map((date) => this.renderMonthView(moment(date), eventDatesMap, holidayDatesMap))}
           </ScrollView>
           :
           <View ref={calendar => this._calendar = calendar}>
-            {calendarDates.map((date) => this.renderMonthView(moment(date), eventDatesMap))}
+            {calendarDates.map((date) => this.renderMonthView(moment(date), eventDatesMap, holidayDatesMap))}
           </View>
         }
       </View>
