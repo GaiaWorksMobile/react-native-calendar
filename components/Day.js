@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import styles from './styles';
+import moment from 'moment';
 
 export default class Day extends Component {
   static defaultProps = {
@@ -26,11 +27,14 @@ export default class Day extends Component {
   }
 
   dayCircleStyle = (isWeekend, isSelected, isToday,hasEvent,isHoliday) => {
-    const { customStyle } = this.props;
+    const { customStyle, isBefore } = this.props;
     const dayCircleStyle = [styles.dayCircleFiller, customStyle.dayCircleFiller && customStyle.dayCircleFiller];
-
     if (hasEvent && hasEvent === true) {
-      dayCircleStyle.push(styles.eventDayCircle, customStyle.eventDayCircle && customStyle.eventDayCircle);
+      if(isBefore) {
+        dayCircleStyle.push(styles.eventInvalidateDayCircle, customStyle.eventInvalidateDayCircle && customStyle.eventInvalidateDayCircle);
+      } else {
+        dayCircleStyle.push(styles.eventDayCircle, customStyle.eventDayCircle && customStyle.eventDayCircle);
+      }
     } 
     if (isHoliday) {
       dayCircleStyle.push(styles.weekendDayCircle, customStyle.weekendDayCircle && customStyle.weekendDayCircle);

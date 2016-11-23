@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   currentDayCircle: {
-    backgroundColor: '#cccccc',
+    backgroundColor: '#0B9444',
   },
   weekendDayCircle: {
     backgroundColor: '#ffc817',
@@ -91,8 +91,12 @@ const styles = StyleSheet.create({
   eventDayCircle: {
     backgroundColor: '#1fd662',
   },
+  eventInvalidateDayCircle: {
+    backgroundColor: '#999999',
+  },
   currentDayText: {
-    color: '#525252',
+    color: 'white',
+    fontWeight: 'bold',
   },
   selectedDayCircle: {
     backgroundColor: 'black',

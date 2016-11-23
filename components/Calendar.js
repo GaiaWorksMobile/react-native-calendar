@@ -109,7 +109,6 @@ export default class Calendar extends Component {
   selectDate(date) {
     this.setState({ selectedMoment: date });
     this.props.onDateSelect && this.props.onDateSelect(date.format());
-    console.log(date);
   }
 
   onPrev = () => {
@@ -126,7 +125,6 @@ export default class Calendar extends Component {
   }
   //下标由0开始
   jump(monthIndex) {
-    console.log("monthIndex   :  " + monthIndex);
     let currentMonth = moment(this.state.currentMonthMoment).month();
     let dis = monthIndex - currentMonth;
     const newMoment = moment(this.state.currentMonthMoment).add(dis, 'month');
@@ -155,17 +153,12 @@ export default class Calendar extends Component {
   }
 
   renderMonthView(argMoment, eventDatesMap, holidayDatesMap) {
-    console.log("argMoment :  " + argMoment)
-
-    console.log("eventDatesMap :  " + JSON.stringify(eventDatesMap))
-
-    console.log("holidayDatesMap :  " + JSON.stringify(holidayDatesMap))
-
     let
       renderIndex = 0,
       weekRows = [],
       days = [],
       startOfArgMonthMoment = argMoment.startOf('month');
+      console.log(`argMoment : ${argMoment.format('YYYY-MM-DD')}`);
 
     const
       selectedMoment = moment(this.state.selectedMoment),
@@ -189,7 +182,7 @@ export default class Calendar extends Component {
     do {
       const dayIndex = renderIndex - offset;
       const isoWeekday = (renderIndex + weekStart) % 7;
-
+      let temp = moment(startOfArgMonthMoment).set('date', dayIndex + 1);
       if (dayIndex >= 0 && dayIndex < argMonthDaysCount) {
         days.push((
           <Day
@@ -198,10 +191,10 @@ export default class Calendar extends Component {
             key={`${renderIndex}`}
             onPress={() => {
               console.log('dayIndex :  '+dayIndex);
-              console.log('startOfArgMonthMoment :  '+startOfArgMonthMoment);
               this.selectDate(moment(startOfArgMonthMoment).set('date', dayIndex + 1));
             }}
             caption={`${dayIndex + 1}`}
+            isBefore={temp.isBefore(todayMoment)}
             isToday={argMonthIsToday && (dayIndex === todayIndex)}
             isSelected={selectedMonthIsArg && (dayIndex === selectedIndex)}
             hasEvent={events && events[dayIndex] === true}
@@ -290,7 +283,6 @@ export default class Calendar extends Component {
   }
 
   render() {
-    console.log("currentMonthMoment  month() :  " + this.state.currentMonthMoment.month());
     const calendarDates = this.getMonthStack(this.state.currentMonthMoment);
     const eventDatesMap = this.prepareEventDates(this.props.eventDates);
     const holidayDatesMap = this.prepareHolidayDates(this.props.holidayDates);
