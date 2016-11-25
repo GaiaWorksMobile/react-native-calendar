@@ -182,7 +182,7 @@ export default class Calendar extends Component {
     do {
       const dayIndex = renderIndex - offset;
       const isoWeekday = (renderIndex + weekStart) % 7;
-      let temp = moment(startOfArgMonthMoment).set('date', dayIndex + 1);
+      let temp = moment(startOfArgMonthMoment).set('date', dayIndex + 2);
       if (dayIndex >= 0 && dayIndex < argMonthDaysCount) {
         days.push((
           <Day
