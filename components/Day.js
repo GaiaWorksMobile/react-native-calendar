@@ -49,7 +49,7 @@ export default class Day extends Component {
   }
 
   dayTextStyle = (isWeekend, isSelected, isToday,hasEvent,isHoliday) => {
-    const { customStyle } = this.props;
+    const { customStyle, isBefore } = this.props;
     const dayTextStyle = [styles.day, customStyle.day];
 
     if (isToday && !isSelected) {
@@ -64,6 +64,9 @@ export default class Day extends Component {
       dayTextStyle.push(styles.eventDayText, customStyle.eventDayText && customStyle.eventDayText);
     } else if (isSelected) {
       dayTextStyle.push(styles.selectedDayText, customStyle.selectedDayText && customStyle.selectedDayText);
+    }
+    if(isBefore) {
+      dayTextStyle.push(styles.eventDayText, customStyle.eventDayText && customStyle.eventDayText);
     }
     return dayTextStyle;
   }
