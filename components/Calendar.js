@@ -124,10 +124,14 @@ export default class Calendar extends Component {
     this.props.onTouchNext && this.props.onTouchNext(newMoment);
   }
   //下标由0开始
-  jump(monthIndex) {
+  jump(YearIndex, monthIndex) {
     let currentMonth = moment(this.state.currentMonthMoment).month();
     let dis = monthIndex - currentMonth;
-    const newMoment = moment(this.state.currentMonthMoment).add(dis, 'month');
+    let currentYear = moment(this.state.currentMonthMoment).year();
+    let disYear = YearIndex - currentYear;
+    console.log('currentYear:  ' + currentYear);
+    const newMoment = moment(this.state.currentMonthMoment).add(dis, 'month').add(disYear, 'year');
+    console.log('newMoment' + newMoment.format('YYYY-MM-DD'));
     this.setState({ currentMonthMoment: newMoment });
     this.props.onTouchNext && this.props.onTouchNext(newMoment);
   }
