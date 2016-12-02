@@ -4,7 +4,7 @@ const DEVICE_WIDTH = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   calendarContainer: {
-    backgroundColor: '#f7f7f7',
+    backgroundColor: 'white',
   },
   monthContainer: {
     width: DEVICE_WIDTH,
@@ -96,10 +96,9 @@ const styles = StyleSheet.create({
   },
   currentDayText: {
     color: 'white',
-    fontWeight: 'bold',
   },
   selectedDayCircle: {
-    backgroundColor: 'black',
+    backgroundColor: '#0B9444',
   },
   selectedDayText: {
     color: 'white',

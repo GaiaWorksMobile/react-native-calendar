@@ -35,14 +35,20 @@ export default class Day extends Component {
     if (isHoliday) {
       dayCircleStyle.push(styles.weekendDayCircle, customStyle.weekendDayCircle && customStyle.weekendDayCircle);
     }
-    if (isToday) {
+
+    if (isSelected && isToday) {
       dayCircleStyle.push(styles.currentDayCircle, customStyle.currentDayCircle && customStyle.currentDayCircle);
+    } else if(!isSelected && isToday) {
+      if (hasEvent && hasEvent === true) {
+        dayCircleStyle.push(styles.eventDayCircle, customStyle.eventDayCircle && customStyle.eventDayCircle);
+      }
+    }
+    
+    if(isBefore) {
+      dayCircleStyle.push(styles.eventInvalidateDayCircle, customStyle.eventInvalidateDayCircle && customStyle.eventInvalidateDayCircle);
     }
     if (isSelected && !isToday) {
       dayCircleStyle.push(styles.selectedDayCircle, customStyle.selectedDayCircle && customStyle.selectedDayCircle);
-    }
-    if(isBefore) {
-      dayCircleStyle.push(styles.eventInvalidateDayCircle, customStyle.eventInvalidateDayCircle && customStyle.eventInvalidateDayCircle);
     }
 
     return dayCircleStyle;
@@ -52,20 +58,21 @@ export default class Day extends Component {
     const { customStyle, isBefore } = this.props;
     const dayTextStyle = [styles.day, customStyle.day];
 
-    if (isToday && !isSelected) {
-      dayTextStyle.push(styles.currentDayText, customStyle.currentDayText && customStyle.currentDayText);
-    } else if (isToday || isSelected) {
+    if (isSelected) {
       dayTextStyle.push(styles.selectedDayText, customStyle.selectedDayText && customStyle.selectedDayText);
-    }
-     else if (isHoliday) {
+    } else if (isHoliday) {
       dayTextStyle.push(styles.weekendDayText, customStyle.weekendDayText && customStyle.weekendDayText);
-    } 
-    else if (hasEvent && hasEvent === true) {
+    } else if (hasEvent && hasEvent === true) {
       dayTextStyle.push(styles.eventDayText, customStyle.eventDayText && customStyle.eventDayText);
-    } else if (isSelected) {
-      dayTextStyle.push(styles.selectedDayText, customStyle.selectedDayText && customStyle.selectedDayText);
     }
-    if(isBefore) {
+
+    if (isSelected && isToday) {
+      dayTextStyle.push(styles.currentDayText, customStyle.currentDayText && customStyle.currentDayText);
+    } else if (!isSelected && isToday){
+      if (hasEvent && hasEvent === true) {
+        dayTextStyle.push(styles.eventDayText, customStyle.eventDayText && customStyle.eventDayText);
+      }
+    } else if(isBefore) {
       dayTextStyle.push(styles.eventDayText, customStyle.eventDayText && customStyle.eventDayText);
     }
     return dayTextStyle;
