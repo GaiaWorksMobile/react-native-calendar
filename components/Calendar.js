@@ -240,6 +240,7 @@ export default class Calendar extends Component {
       const j = (i + this.props.weekStart) % 7;
       headings.push(
         <Text
+          allowFontScaling={false}
           key={i}
           style={j === 0 || j === 6 ?
             [styles.weekendHeading, this.props.customStyle.weekendHeading] :
@@ -266,18 +267,18 @@ export default class Calendar extends Component {
             style={[styles.controlButton, this.props.customStyle.controlButton]}
             onPress={this.onPrev}
           >
-            <Text style={[styles.controlButtonText, this.props.customStyle.controlButtonText]}>
+            <Text allowFontScaling={false} style={[styles.controlButtonText, this.props.customStyle.controlButtonText]}>
               {this.props.prevButtonText}
             </Text>
           </TouchableOpacity>
-          <Text style={[styles.title, this.props.customStyle.title]}>
+          <Text allowFontScaling={false} style={[styles.title, this.props.customStyle.title]}>
             {localizedMonth} {this.state.currentMonthMoment.year()}
           </Text>
           <TouchableOpacity
             style={[styles.controlButton, this.props.customStyle.controlButton]}
             onPress={this.onNext}
           >
-            <Text style={[styles.controlButtonText, this.props.customStyle.controlButtonText]}>
+            <Text allowFontScaling={false} style={[styles.controlButtonText, this.props.customStyle.controlButtonText]}>
               {this.props.nextButtonText}
             </Text>
           </TouchableOpacity>
